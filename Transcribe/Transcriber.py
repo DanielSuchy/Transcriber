@@ -31,8 +31,6 @@ class Transcriber(object):
     elif letter in self.alphabet.Segments:
       segment = self.alphabet.get_phonetic_representation(letter)
       segment = self.apply_assimilation(segment, next_letter, next_assimilation)
-    else:
-      segment = letter
 
     return segment
 
