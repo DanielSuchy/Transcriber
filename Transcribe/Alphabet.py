@@ -43,6 +43,7 @@ class Alphabet(object):
     'b': ['b', Segment(True,True, 'bilabial', 'stop','','',False,False)],
     'p': ['p', Segment(True,False, 'bilabial', 'stop','','',False,False)],
     'l': ['l', Segment(True,True, 'alveolar', 'lateral aproximant','','',False,False)],
+    'f': ['f', Segment(True,False, 'labiodental', 'fricative','','',False,False)],
     ' ': [' ', Segment(False,False, '', '','','',False,False)]
   }
 

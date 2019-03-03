@@ -300,6 +300,19 @@ class TestTranscriber(unittest.TestCase):
     transcriber = Transcriber('a asi ano')
     self.assertEqual(str(transcriber), 'ʔa ʔasɪ ʔano')
 
+  def test_handle_diftong(self):
+    transcriber = Transcriber('louka')
+    self.assertEqual(str(transcriber), 'lo͡uka')
+
+    transcriber = Transcriber('používat')
+    self.assertEqual(str(transcriber), 'po͡uʒiːvat')
+
+    transcriber = Transcriber('často učí')
+    self.assertEqual(str(transcriber), 't͡ʃasto ʔut͡ʃiː')
+
+    transcriber = Transcriber('outfit')
+    self.assertEqual(str(transcriber), 'ʔo͡utfɪt')
+
 
 
 

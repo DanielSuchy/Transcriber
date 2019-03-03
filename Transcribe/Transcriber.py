@@ -36,9 +36,12 @@ class Transcriber(object):
       segment = 'ʔ' + letter
     elif next_letter == 'i':
       segment = self.handle_i_palatalization(letter)
-    elif letter in self.alphabet.Segments:
+    else:
       segment = self.alphabet.get_phonetic_representation(letter)
       segment = self.apply_assimilation(segment, next_letter, next_assimilation)
+
+    if letter == 'o' and next_letter == 'u':
+      segment += '͡'
 
     return segment
 
