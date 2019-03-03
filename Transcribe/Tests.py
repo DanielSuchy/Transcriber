@@ -235,10 +235,10 @@ class TestTranscriber(unittest.TestCase):
     self.assertEqual(str(transcriber), 'tɪb ɦlaːskɪ')
 
     transcriber = Transcriber('hod kladivem')
-    self.assertEqual(str(transcriber), 'ɦot kladɪvɛm')
+    self.assertEqual(str(transcriber), 'ɦot klaɟɪvɛm')
 
     transcriber = Transcriber('hod diskem')
-    self.assertEqual(str(transcriber), 'ɦod dɪskɛm')
+    self.assertEqual(str(transcriber), 'ɦod ɟɪskɛm')
 
   def test_handle_soft_e(self):
     transcriber = Transcriber('')
@@ -272,6 +272,28 @@ class TestTranscriber(unittest.TestCase):
 
     transcriber = Transcriber('uměnovědě')
     self.assertEqual(str(transcriber), 'umɲɛnovjɛɟɛ')
+
+  def test_handle_i_palatalization(self):
+    transcriber = Transcriber('')
+    t = transcriber.handle_i_palatalization('t')
+    self.assertEqual(t, 'c')
+
+    d = transcriber.handle_i_palatalization('d')
+    self.assertEqual(d, 'ɟ')
+
+    n = transcriber.handle_i_palatalization('n')
+    self.assertEqual(n, 'ɲ')
+
+    transcriber = Transcriber('nemocnice')
+    self.assertEqual(str(transcriber), 'nɛmot͡sɲɪt͡sɛ')
+
+    transcriber = Transcriber('pohltila')
+    self.assertEqual(str(transcriber), 'poɦlcɪla')
+
+    transcriber = Transcriber('hladina')
+    self.assertEqual(str(transcriber), 'ɦlaɟɪna')
+
+
 
 
 if __name__ == "__main__":

@@ -30,9 +30,21 @@ class Transcriber(object):
       segment = 'x'
     elif next_letter == 'ě':
       segment = self.handle_soft_e(letter)
+    elif next_letter == 'i':
+      segment = self.handle_i_palatalization(letter)
     elif letter in self.alphabet.Segments:
       segment = self.alphabet.get_phonetic_representation(letter)
       segment = self.apply_assimilation(segment, next_letter, next_assimilation)
+
+    return segment
+
+  def handle_i_palatalization(self, letter):
+    segment = self.alphabet.get_phonetic_representation(letter)
+    segment_desc = self.alphabet.get_phonetic_description(letter)
+
+    if segment_desc.place == 'alveolar' and segment_desc.manner in ('stop', 'nasal'):
+      new_segment = Segment(segment_desc.is_consonant, segment_desc.is_voiced, 'palatal', segment_desc.manner, '', '', False, False)
+      return self.alphabet.get_symbol_by_phoneme(new_segment)
 
     return segment
 
