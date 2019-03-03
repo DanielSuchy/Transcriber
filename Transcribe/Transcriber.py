@@ -12,24 +12,28 @@ class Transcriber(object):
   def transcribe_text(self, text):
     i = 0
     text_length = len(text)
-    get_next_letter = lambda next_letter: text[i+1] if i < text_length - 1 else ' ' #return ' ' not OutOfRange
+    get_next_letter = lambda next_letter: text[i+1] if i < text_length - 1 else '' #return '' not OutOfRange
 
     while i < text_length:
       letter = text[i]
       next_letter = get_next_letter(i)
       next_assimilation = self.get_last_consonant(text, i)
-      self.transcription += self.transcribe_letter(letter, next_letter, next_assimilation)
+      self.transcription += self.transcribe_letter(letter, next_letter, next_assimilation,i)
 
       if letter == 'c' and next_letter == 'h':
         i += 1 # grapheme 'ch' defaults to 'x'
 
       i += 1
 
-  def transcribe_letter(self, letter, next_letter, next_assimilation):
+  def transcribe_letter(self, letter, next_letter, next_assimilation,i):
     if letter == 'c' and next_letter == 'h':
       segment = 'x'
     elif next_letter == 'ě':
       segment = self.handle_soft_e(letter)
+    elif (letter == ' ' and next_letter in 'aeiouáéíóúů'):
+      segment = ' ʔ'
+    elif (i == 0 and letter in 'aeiouáéíóúů'):
+      segment = 'ʔ' + letter
     elif next_letter == 'i':
       segment = self.handle_i_palatalization(letter)
     elif letter in self.alphabet.Segments:

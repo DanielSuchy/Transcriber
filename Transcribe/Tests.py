@@ -213,7 +213,7 @@ class TestTranscriber(unittest.TestCase):
     self.assertEqual(str(transcriber), 'lɛpka')
 
     transcriber = Transcriber('odkráčet')
-    self.assertEqual(str(transcriber), 'otkraːt͡ʃɛt')
+    self.assertEqual(str(transcriber), 'ʔotkraːt͡ʃɛt')
 
     transcriber = Transcriber('rozkrojit')
     self.assertEqual(str(transcriber), 'roskrojɪt')
@@ -271,7 +271,7 @@ class TestTranscriber(unittest.TestCase):
     self.assertEqual(str(transcriber), 'mɲɛɟɛɲɛ')
 
     transcriber = Transcriber('uměnovědě')
-    self.assertEqual(str(transcriber), 'umɲɛnovjɛɟɛ')
+    self.assertEqual(str(transcriber), 'ʔumɲɛnovjɛɟɛ')
 
   def test_handle_i_palatalization(self):
     transcriber = Transcriber('')
@@ -292,6 +292,13 @@ class TestTranscriber(unittest.TestCase):
 
     transcriber = Transcriber('hladina')
     self.assertEqual(str(transcriber), 'ɦlaɟɪna')
+
+  def test_handle_glottal_stop(self):
+    transcriber = Transcriber('co otestovat')
+    self.assertEqual(str(transcriber), 't͡so ʔotɛstovat')
+
+    transcriber = Transcriber('a asi ano')
+    self.assertEqual(str(transcriber), 'ʔa ʔasɪ ʔano')
 
 
 
