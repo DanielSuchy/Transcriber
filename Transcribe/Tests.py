@@ -5,8 +5,6 @@ from Text import Text
 from Segment import Segment
 from Transcriber import Transcriber
 from Alphabet import Alphabet
-from Consonant import Consonant
-from Vocal import Vocal
 
 class TestFileIO(unittest.TestCase):
 
@@ -82,47 +80,6 @@ class TestSegment(unittest.TestCase):
 
     with self.assertRaises(Exception):
       Segment(False, True, '', '', 'test', 'front', False, False)
-
-class TestVocal(unittest.TestCase):
-
-  def test_create_vocal(self):
-    v = Vocal(True, 'close', 'front', False, True)
-    self.assertEqual(v.is_voiced, True)
-    self.assertEqual(v.height, 'close')
-    self.assertEqual(v.backness, 'front')
-
-  def test_incorrect_vocal(self):
-    with self.assertRaises(Exception):
-      Vocal(True, 'close', 'test', False, False)
-
-    with self.assertRaises(Exception):
-      Vocal(True, 'test', 'front', False, False)
-
-
-class TestConsonant(unittest.TestCase):
-
-  def test_create_consonant(self):
-    c = Consonant(True, 'bilabial', 'stop')
-    self.assertEqual(c.is_voiced, True)
-    self.assertEqual(c.manner, 'stop')
-    self.assertEqual(c.place, 'bilabial')
-
-  def test_rename_consonant(self):
-    c = Consonant(True, 'alveolar', 'tap')
-    self.assertEqual(c.manner, 'tap/flap')
-
-    c = Consonant(True, 'alveolar', 'tap')
-    self.assertEqual(c.manner, 'tap/flap')
-
-  def test_incorrect_consonant(self):
-    with self.assertRaises(Exception):
-      Consonant(True, 'test', 'stop')
-
-    with self.assertRaises(Exception):
-      Consonant(True, 'bilabial', 'test')
-
-    with self.assertRaises(Exception):
-      Consonant(False, 'bilabial', 'nasal') # nasals are always voiced
 
 class TestAlphabet(unittest.TestCase):
 
@@ -268,7 +225,7 @@ class TestTranscriber(unittest.TestCase):
     self.assertEqual(str(transcriber), 'zbliːʒɪt sɛ')
 
     transcriber = Transcriber('věštba')
-    self.assertEqual(str(transcriber), 'vɛʒdba')
+    self.assertEqual(str(transcriber), 'vjɛʒdba')
 
     transcriber = Transcriber('švédský')
     self.assertEqual(str(transcriber),  'ʃvɛːtskiː')
@@ -282,6 +239,39 @@ class TestTranscriber(unittest.TestCase):
 
     transcriber = Transcriber('hod diskem')
     self.assertEqual(str(transcriber), 'ɦod dɪskɛm')
+
+  def test_handle_soft_e(self):
+    transcriber = Transcriber('')
+    
+    vj = transcriber.handle_soft_e('v')
+    self.assertEqual('vj', vj)
+
+    mn = transcriber.handle_soft_e('m')
+    self.assertEqual('mɲ', mn)
+
+    d = transcriber.handle_soft_e('d')
+    self.assertEqual('ɟ', d)
+
+    c = transcriber.handle_soft_e('t')
+    self.assertEqual('c', c)
+
+    transcriber = Transcriber('době')
+    self.assertEqual(str(transcriber), 'dobjɛ')
+
+    transcriber = Transcriber('kromě')
+    self.assertEqual(str(transcriber), 'kromɲɛ')
+
+    transcriber = Transcriber('silně')
+    self.assertEqual(str(transcriber), 'sɪlɲɛ')
+
+    transcriber = Transcriber('těmi')
+    self.assertEqual(str(transcriber), 'cɛmɪ')
+
+    transcriber = Transcriber('měděně')
+    self.assertEqual(str(transcriber), 'mɲɛɟɛɲɛ')
+
+    transcriber = Transcriber('uměnovědě')
+    self.assertEqual(str(transcriber), 'umɲɛnovjɛɟɛ')
 
 
 if __name__ == "__main__":
