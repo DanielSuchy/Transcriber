@@ -300,6 +300,9 @@ class TestTranscriber(unittest.TestCase):
     transcriber = Transcriber('hladina')
     self.assertEqual(str(transcriber), 'ɦlaɟɪna')
 
+    transcriber = Transcriber('zapomnění')
+    self.assertEqual(str(transcriber), 'zapomɲɛɲiː')
+
   def test_handle_glottal_stop(self):
     transcriber = Transcriber('co otestovat')
     self.assertEqual(str(transcriber), 't͡so ʔotɛstovat')
@@ -329,6 +332,67 @@ class TestTranscriber(unittest.TestCase):
 
     transcriber = Transcriber('typ, hlásky')
     self.assertEqual(str(transcriber), 'tɪp | ɦlaːskɪ')
+
+  def test_full_sentences(self):
+    transcriber = Transcriber("Kokos kapal na koberec")
+    self.assertEqual(str(transcriber), "kokos kapal na kobɛrɛt͡s")
+
+    transcriber = Transcriber("Provoz balil vesnici do smogu")
+    self.assertEqual(str(transcriber), "provoz balɪl vɛsɲɪt͡sɪ do smogu")
+
+    transcriber = Transcriber("Hrozba upadla v zapomnění")
+    self.assertEqual(str(transcriber), "ɦrozba ʔupadla v zapomɲɛɲiː")
+
+    transcriber = Transcriber("Fotka vzbudila pozornost")
+    self.assertEqual(str(transcriber), "fotka vzbuɟɪla pozornost")
+
+    # transcriber = Transcriber("Vozka spadl z kozlíku")
+    # self.assertEqual(str(transcriber), "voska spadl̩ skozliːku")
+
+    # transcriber = Transcriber("Prosba všechny zaskočila")
+    # self.assertEqual(str(transcriber), "prozba fʃɛxnɪ zaskot͡ʃɪla")
+
+    transcriber = Transcriber("Troska vyšla ze sklepení")
+    self.assertEqual(str(transcriber), "troska vɪʃla zɛ sklɛpɛɲiː")
+
+    transcriber = Transcriber("Podej mi prosím tě tamten kokos")
+    self.assertEqual(str(transcriber), "podɛj mɪ prosiːm cɛ tamtɛn kokos")
+
+    transcriber = Transcriber("Podzimní setba rolníkům nevyšla")
+    self.assertEqual(str(transcriber), "podzɪmɲiː sɛdba rolɲiːkuːm nɛvɪʃla") # is africate????????
+
+    # transcriber = Transcriber("Připrav se radši na hustý provoz")
+    # self.assertEqual(str(transcriber), "pr̥̝ɪpraf sɛ ratʃɪ na ɦustiː provos")
+
+    # transcriber = Transcriber("Porod kazil klid na oddělení")
+    # self.assertEqual(str(transcriber), "porot kazɪl klɪt na ͏ʔoɟɛlɛɲiː")
+
+    transcriber = Transcriber("kokos baštil ve vaně")
+    self.assertEqual(str(transcriber), "kokoz baʃcɪl vɛ vaɲɛ")
+
+    transcriber = Transcriber("Říznutá vodka nebyla k pití")
+    self.assertEqual(str(transcriber), "r̝iːznutaː votka nɛbɪla k pɪciː")
+
+    transcriber = Transcriber("Provoz kalil náladu chodců")
+    self.assertEqual(str(transcriber), "provos kalɪl naːladu xott͡suː")
+
+    transcriber = Transcriber("Robot bažil po klidu v ústraní")
+    self.assertEqual(str(transcriber), "robod baʒɪl po klɪdu v ʔuːstraɲiː")
+
+    transcriber = Transcriber("Špinavá chodba zela prázdnotou")
+    self.assertEqual(str(transcriber), "ʃpɪnavaː xodba zɛla praːzdnoto͡u")
+
+    transcriber = Transcriber("Tohle byl opravdu rychlý porod")
+    self.assertEqual(str(transcriber), "toɦlɛ bɪl ʔopravdu rɪxliː porot")
+
+    # transcriber = Transcriber("Tuhle mi připadlo, že jsem robot")
+    # self.assertEqual(str(transcriber), "tuɦlɛ mɪ pr̝̊ɪpadlo | ʒɛ jsɛm robot")
+
+    transcriber = Transcriber("V noci se robot kasal svými výkony")
+    self.assertEqual(str(transcriber), "v not͡sɪ sɛ robot kasal sviːmɪ viːkonɪ")
+
+    # transcriber = Transcriber("Porod bavil všechny přítomné")
+    # self.assertEqual(str(transcriber), "Porod bavɪl fʃɛxnɪ pr̝̊iːtomnɛː")
 
 
 

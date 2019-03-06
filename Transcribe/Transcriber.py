@@ -39,7 +39,7 @@ class Transcriber(object):
       segment = ' ʔ'
     elif (i == 0 and letter in 'aeiouáéíóúů'):
       segment = 'ʔ' + letter
-    elif next_letter == 'i':
+    elif next_letter in ['i', 'í']:
       segment = self.handle_i_palatalization(letter)
     else:
       segment = self.alphabet.get_phonetic_representation(letter)
