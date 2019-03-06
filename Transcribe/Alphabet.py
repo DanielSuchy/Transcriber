@@ -44,7 +44,10 @@ class Alphabet(object):
     'p': ['p', Segment(True,False, 'bilabial', 'stop','','',False,False)],
     'l': ['l', Segment(True,True, 'alveolar', 'lateral aproximant','','',False,False)],
     'f': ['f', Segment(True,False, 'labiodental', 'fricative','','',False,False)],
-    ' ': [' ', Segment(False,False, '', '','','',False,False)]
+    ' ': [' ', Segment(False,False, '', '','','',False,False)],
+    ',': [',', Segment(False,False, '', '','','',False,False)],
+    '.': ['.', Segment(False,False, '', '','','',False,False)],
+    '|': ['|', Segment(False,False, '', '','','',False,False)]
   }
 
   def get_symbol_by_phoneme(self, phoneme):

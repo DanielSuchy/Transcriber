@@ -7,17 +7,22 @@ class Transcriber(object):
     self.alphabet = Alphabet()
     self.text = text
     self.transcription = ""
-    self.transcribe_text(text)
+    self.set_prosodic_intervals()
+    self.transcribe_text()
 
-  def transcribe_text(self, text):
+  def set_prosodic_intervals(self):
+    self.text = self.text.replace(',', ' |')
+    self.text = self.text.replace('.', ' ||')
+
+  def transcribe_text(self):
     i = 0
-    text_length = len(text)
-    get_next_letter = lambda next_letter: text[i+1] if i < text_length - 1 else '' #return '' not OutOfRange
+    text_length = len(self.text)
+    get_next_letter = lambda next_letter: self.text[i+1] if i < text_length - 1 else '' #return '' not OutOfRange
 
     while i < text_length:
-      letter = text[i]
+      letter = self.text[i]
       next_letter = get_next_letter(i)
-      next_assimilation = self.get_last_consonant(text, i)
+      next_assimilation = self.get_last_consonant(self.text, i)
       self.transcription += self.transcribe_letter(letter, next_letter, next_assimilation,i)
 
       if letter == 'c' and next_letter == 'h':

@@ -240,6 +240,13 @@ class TestTranscriber(unittest.TestCase):
     transcriber = Transcriber('hod diskem')
     self.assertEqual(str(transcriber), 'ɦod ɟɪskɛm')
 
+    transcriber = Transcriber('hod míčem')
+    self.assertEqual(str(transcriber), 'ɦot miːt͡ʃɛm')
+
+    transcriber = Transcriber('let letadla')
+    self.assertEqual(str(transcriber), 'lɛt lɛtadla')
+    
+
   def test_handle_soft_e(self):
     transcriber = Transcriber('')
     
@@ -312,6 +319,16 @@ class TestTranscriber(unittest.TestCase):
 
     transcriber = Transcriber('outfit')
     self.assertEqual(str(transcriber), 'ʔo͡utfɪt')
+
+  def test_prosodic_interval(self):
+    transcriber = Transcriber("slovo, slovo")
+    self.assertEqual(str(transcriber), 'slovo | slovo')
+
+    transcriber = Transcriber("slovo. slovo")
+    self.assertEqual(str(transcriber), 'slovo || slovo')
+
+    transcriber = Transcriber('typ, hlásky')
+    self.assertEqual(str(transcriber), 'tɪp | ɦlaːskɪ')
 
 
 
