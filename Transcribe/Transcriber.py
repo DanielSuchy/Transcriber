@@ -5,7 +5,7 @@ class Transcriber(object):
 
   def __init__(self, text):
     self.alphabet = Alphabet()
-    self.text = text
+    self.text = text.lower()
     self.transcription = ""
     self.set_prosodic_intervals()
     self.transcribe_text()
