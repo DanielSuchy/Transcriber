@@ -48,7 +48,31 @@ class Transcriber(object):
     if letter == 'o' and next_letter == 'u':
       segment += '͡'
 
+    if letter in ['l', 'r']:
+      segment = self.handle_syllabic_consonant(i)
+
     return segment
+
+  def handle_syllabic_consonant(self, i):
+    current_segment = self.text[i]
+
+    if i >= 1:
+      previous_segment = self.text[i-1]
+    else:
+      previous_segment = ''
+
+    if i+1 < len(self.text):
+      next_segment = self.text[i+1]
+    else:
+      next_segment = ''
+
+    if current_segment == 'r' and not (previous_segment in 'aeiouáéíóúůýy' or next_segment in 'aeiouáéíóúůýy'):
+      return 'r̩'
+    if current_segment == 'l'and not (previous_segment in 'aeiouáéíóúůýy' or next_segment in 'aeiouáéíóúůýy'):
+      return 'l̩'
+
+    return current_segment
+
 
   def handle_i_palatalization(self, letter):
     segment = self.alphabet.get_phonetic_representation(letter)

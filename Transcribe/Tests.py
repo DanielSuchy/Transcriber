@@ -203,7 +203,8 @@ class TestTranscriber(unittest.TestCase):
     self.assertEqual(p, 'p')
 
     transcriber = Transcriber('blb')
-    self.assertEqual(str(transcriber), 'blp')
+    #self.assertEqual(str(transcriber), 'blp')
+    self.assertEqual(str(transcriber), 'bl̩p')
 
     transcriber = Transcriber('chlup')
     self.assertEqual(str(transcriber), 'xlup')
@@ -295,7 +296,7 @@ class TestTranscriber(unittest.TestCase):
     self.assertEqual(str(transcriber), 'nɛmot͡sɲɪt͡sɛ')
 
     transcriber = Transcriber('pohltila')
-    self.assertEqual(str(transcriber), 'poɦlcɪla')
+    self.assertEqual(str(transcriber), 'poɦl̩cɪla')
 
     transcriber = Transcriber('hladina')
     self.assertEqual(str(transcriber), 'ɦlaɟɪna')
@@ -306,6 +307,9 @@ class TestTranscriber(unittest.TestCase):
   def test_handle_glottal_stop(self):
     transcriber = Transcriber('co otestovat')
     self.assertEqual(str(transcriber), 't͡so ʔotɛstovat')
+
+    transcriber = Transcriber('na oddělení')
+    self.assertEqual(str(transcriber), 'na ʔodɟɛlɛɲiː')
 
     transcriber = Transcriber('a asi ano')
     self.assertEqual(str(transcriber), 'ʔa ʔasɪ ʔano')
@@ -322,6 +326,16 @@ class TestTranscriber(unittest.TestCase):
 
     transcriber = Transcriber('outfit')
     self.assertEqual(str(transcriber), 'ʔo͡utfɪt')
+
+  def test_handle_sylabic_consonant(self):
+    transcriber = Transcriber('plch')
+    self.assertEqual(str(transcriber), 'pl̩x')
+
+    transcriber = Transcriber('plech')
+    self.assertEqual(str(transcriber), 'plɛx')
+
+    transcriber = Transcriber('prchnout')
+    self.assertEqual(str(transcriber), 'pr̩xno͡ut')
 
   def test_prosodic_interval(self):
     transcriber = Transcriber("slovo, slovo")
@@ -346,8 +360,8 @@ class TestTranscriber(unittest.TestCase):
     transcriber = Transcriber("Fotka vzbudila pozornost")
     self.assertEqual(str(transcriber), "fotka vzbuɟɪla pozornost")
 
-    # transcriber = Transcriber("Vozka spadl z kozlíku")
-    # self.assertEqual(str(transcriber), "voska spadl̩ skozliːku")
+    transcriber = Transcriber("Vozka spadl z kozlíku")
+    self.assertEqual(str(transcriber), "voska spadl̩ s kozliːku")
 
     # transcriber = Transcriber("Prosba všechny zaskočila")
     # self.assertEqual(str(transcriber), "prozba fʃɛxnɪ zaskot͡ʃɪla")
@@ -364,8 +378,8 @@ class TestTranscriber(unittest.TestCase):
     # transcriber = Transcriber("Připrav se radši na hustý provoz")
     # self.assertEqual(str(transcriber), "pr̥̝ɪpraf sɛ ratʃɪ na ɦustiː provos")
 
-    # transcriber = Transcriber("Porod kazil klid na oddělení")
-    # self.assertEqual(str(transcriber), "porot kazɪl klɪt na ͏ʔoɟɛlɛɲiː")
+    transcriber = Transcriber("Porod kazil klid na oddělení")
+    self.assertEqual(str(transcriber), "porot kazɪl klɪt na ʔodɟɛlɛɲiː")
 
     transcriber = Transcriber("kokos baštil ve vaně")
     self.assertEqual(str(transcriber), "kokoz baʃcɪl vɛ vaɲɛ")
