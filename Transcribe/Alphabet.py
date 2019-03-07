@@ -3,7 +3,7 @@ from Segment import Segment
 class Alphabet(object):
   #is_consonant, is_voiced, place, manner, vowel_height, vowel_backness, is_rounded, is_long
   Segments = {
-    'á': ['aː', Segment(False, True, '', '', 'open', 'front', False, True)],
+    'á': ['aː', Segment(False, True,  '', '', 'open', 'front', False, True)],
     'a': ['a', Segment(False,True, '', '', 'open', 'front', False, False)],
     'e': ['ɛ', Segment(False, True, '', '', 'open-mid', 'front', False, False)],
     'ě': ['ɛ', Segment(False, True, '', '', 'open-mid', 'front', False, False)],
@@ -42,7 +42,12 @@ class Alphabet(object):
     'v': ['v', Segment(True,True, 'labiodental', 'fricative','','',False,False)],
     'b': ['b', Segment(True,True, 'bilabial', 'stop','','',False,False)],
     'p': ['p', Segment(True,False, 'bilabial', 'stop','','',False,False)],
-    ' ': [' ', Segment(False,False, '', '','','',False,False)]
+    'l': ['l', Segment(True,True, 'alveolar', 'lateral aproximant','','',False,False)],
+    'f': ['f', Segment(True,False, 'labiodental', 'fricative','','',False,False)],
+    ' ': [' ', Segment(False,False, '', '','','',False,False)],
+    ',': [',', Segment(False,False, '', '','','',False,False)],
+    '.': ['.', Segment(False,False, '', '','','',False,False)],
+    '|': ['|', Segment(False,False, '', '','','',False,False)]
   }
 
   def get_symbol_by_phoneme(self, phoneme):

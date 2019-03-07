@@ -1,7 +1,7 @@
 class Segment(object):
 
   possible_place = ['bilabial', 'labiodental', 'dental', 'alveolar', 'postalveolar', 'retroflex', 'palatal', 'velar', 'uvular', 'pharyngeal', 'glottal']
-  possible_manner = ['stop', 'fricative', 'africate', 'tap', 'flap', 'tap/flap', 'aproximant', 'nasal', 'trill']
+  possible_manner = ['stop', 'fricative', 'africate', 'tap', 'flap', 'tap/flap', 'aproximant', 'lateral aproximant', 'nasal', 'trill']
   possible_height = ['close', 'near-close', 'close-mid', 'mid', 'open-mid', 'near-open', 'open']
   possible_backness = ['front', 'central', 'back']
   def __init__(self, is_consonant, is_voiced, place, manner, vowel_height, vowel_backness, is_rounded, is_long):
@@ -13,9 +13,7 @@ class Segment(object):
     self.height = self.get_height(vowel_height)
     self.is_long = is_long
 
-    if self.place == 'labiodental' and self.manner == 'fricative':
-      self.is_obstruent = False #Exception
-    elif self.manner in ['stop', 'fricative', 'africate']:
+    if self.manner in ['stop', 'fricative', 'africate']:
       self.is_obstruent = True
     else:
       self.is_obstruent = False
