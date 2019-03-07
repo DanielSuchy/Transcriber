@@ -337,6 +337,19 @@ class TestTranscriber(unittest.TestCase):
     transcriber = Transcriber('prchnout')
     self.assertEqual(str(transcriber), 'pr̩xno͡ut')
 
+  def test_handle_soft_r_assimilation(self):
+    transcriber = Transcriber('příroda')
+    self.assertEqual(str(transcriber), 'pr̝̊iːroda')
+
+    transcriber = Transcriber('keř')
+    self.assertEqual(str(transcriber), 'kɛr̝̊')
+
+    transcriber = Transcriber('řek')
+    self.assertEqual(str(transcriber), 'r̝ɛk')
+
+    transcriber = Transcriber('dři')
+    self.assertEqual(str(transcriber), 'dr̝ɪ')
+
   def test_prosodic_interval(self):
     transcriber = Transcriber("slovo, slovo")
     self.assertEqual(str(transcriber), 'slovo | slovo')
@@ -375,8 +388,8 @@ class TestTranscriber(unittest.TestCase):
     transcriber = Transcriber("Podzimní setba rolníkům nevyšla")
     self.assertEqual(str(transcriber), "podzɪmɲiː sɛdba rolɲiːkuːm nɛvɪʃla") # is africate????????
 
-    # transcriber = Transcriber("Připrav se radši na hustý provoz")
-    # self.assertEqual(str(transcriber), "pr̥̝ɪpraf sɛ ratʃɪ na ɦustiː provos")
+    transcriber = Transcriber("Připrav se radši na hustý provoz")
+    self.assertEqual(str(transcriber), "pr̝̊ɪpraf sɛ ratʃɪ na ɦustiː provos")
 
     transcriber = Transcriber("Porod kazil klid na oddělení")
     self.assertEqual(str(transcriber), "porot kazɪl klɪt na ʔodɟɛlɛɲiː")
@@ -399,14 +412,14 @@ class TestTranscriber(unittest.TestCase):
     transcriber = Transcriber("Tohle byl opravdu rychlý porod")
     self.assertEqual(str(transcriber), "toɦlɛ bɪl ʔopravdu rɪxliː porot")
 
-    # transcriber = Transcriber("Tuhle mi připadlo, že jsem robot")
-    # self.assertEqual(str(transcriber), "tuɦlɛ mɪ pr̝̊ɪpadlo | ʒɛ jsɛm robot")
+    transcriber = Transcriber("Tuhle mi připadlo, že jsem robot")
+    self.assertEqual(str(transcriber), "tuɦlɛ mɪ pr̝̊ɪpadlo | ʒɛ jsɛm robot")
 
     transcriber = Transcriber("V noci se robot kasal svými výkony")
     self.assertEqual(str(transcriber), "v not͡sɪ sɛ robot kasal sviːmɪ viːkonɪ")
 
-    # transcriber = Transcriber("Porod bavil všechny přítomné")
-    # self.assertEqual(str(transcriber), "porod bavɪl fʃɛxnɪ pr̝̊iːtomnɛː")
+    transcriber = Transcriber("Porod bavil všechny přítomné")
+    self.assertEqual(str(transcriber), "porod bavɪl fʃɛxnɪ pr̝̊iːtomnɛː")
 
 
 

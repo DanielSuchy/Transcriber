@@ -51,7 +51,31 @@ class Transcriber(object):
     if letter in ['l', 'r']:
       segment = self.handle_syllabic_consonant(i)
 
+    if letter == 'ř':
+      segment = self.handle_soft_r_assimilation(i)
+
     return segment
+
+  def handle_soft_r_assimilation(self, i):
+    soft_r = self.text[i]
+
+    if i >= 1:
+      previous_letter = self.text[i-1]
+    else:
+      previous_letter = ''
+
+    previous_segment = self.alphabet.get_phonetic_description(previous_letter)
+
+
+    if i+1 < len(self.text):
+      next_letter = self.text[i+1]
+    else:
+      next_letter = ' '
+
+    if previous_letter != '' and previous_segment.is_voiced == False or next_letter == ' ':
+      return 'r̝̊'
+
+    return 'r̝'
 
   def handle_syllabic_consonant(self, i):
     current_segment = self.text[i]
