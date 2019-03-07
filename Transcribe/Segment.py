@@ -13,9 +13,7 @@ class Segment(object):
     self.height = self.get_height(vowel_height)
     self.is_long = is_long
 
-    if self.place == 'labiodental' and self.manner == 'fricative':
-      self.is_obstruent = False #Exception
-    elif self.manner in ['stop', 'fricative', 'africate']:
+    if self.manner in ['stop', 'fricative', 'africate']:
       self.is_obstruent = True
     else:
       self.is_obstruent = False

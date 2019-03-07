@@ -363,8 +363,8 @@ class TestTranscriber(unittest.TestCase):
     transcriber = Transcriber("Vozka spadl z kozlíku")
     self.assertEqual(str(transcriber), "voska spadl̩ s kozliːku")
 
-    # transcriber = Transcriber("Prosba všechny zaskočila")
-    # self.assertEqual(str(transcriber), "prozba fʃɛxnɪ zaskot͡ʃɪla")
+    transcriber = Transcriber("Prosba všechny zaskočila")
+    self.assertEqual(str(transcriber), "prozba fʃɛxnɪ zaskot͡ʃɪla")
 
     transcriber = Transcriber("Troska vyšla ze sklepení")
     self.assertEqual(str(transcriber), "troska vɪʃla zɛ sklɛpɛɲiː")
@@ -406,7 +406,7 @@ class TestTranscriber(unittest.TestCase):
     self.assertEqual(str(transcriber), "v not͡sɪ sɛ robot kasal sviːmɪ viːkonɪ")
 
     # transcriber = Transcriber("Porod bavil všechny přítomné")
-    # self.assertEqual(str(transcriber), "Porod bavɪl fʃɛxnɪ pr̝̊iːtomnɛː")
+    # self.assertEqual(str(transcriber), "porod bavɪl fʃɛxnɪ pr̝̊iːtomnɛː")
 
 
 

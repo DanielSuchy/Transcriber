@@ -123,9 +123,13 @@ class Transcriber(object):
       
     next_segment = self.alphabet.get_phonetic_description(next_letter)
 
+    if current_segment.place == 'labiodental' and current_segment.manner == 'fricative' and next_segment.is_obstruent == True:
+      current_segment.is_obstruent = False #v behaves as non-obstruent only if is being asimilated
+
     if (current_segment.is_obstruent == True
         and next_segment.is_consonant == True
         and next_segment.is_obstruent == True
+        or (letter == 'v' and next_letter != ' ') # exception
        ):
       new_segment = Segment(current_segment.is_consonant, next_segment.is_voiced, current_segment.place, current_segment.manner, '','',False, False)
       letter = self.alphabet.get_symbol_by_phoneme(new_segment)
@@ -135,7 +139,9 @@ class Transcriber(object):
     for i in range(i, len(text)+1):
       next_letter = text[i]
       next_segment = self.alphabet.get_phonetic_description(next_letter)
-      if next_segment.is_obstruent == False and next_letter != ' ':
+      if next_letter == 'v': #exception even if is obstruent
+        continue
+      elif next_segment.is_obstruent == False and next_letter != ' ':
         return text[i-1]
       elif (i == len(text) - 1):
         return ' '
@@ -148,6 +154,8 @@ class Transcriber(object):
 if __name__ == '__main__':
 
   transcriber = Transcriber('')
+  # print('\n\n' + transcriber.get_last_consonant('všechny', 0))
+  # print('\n\n' + transcriber.get_last_consonant('švédský', 0))
   # transcriber.get_next_assimilation('ch', 0)
   # transcriber.get_next_assimilation('pes', 0)
   # t = transcriber.apply_voicing_assimilation('d', 'k')
@@ -167,4 +175,12 @@ if __name__ == '__main__':
 
   # transcriber = Transcriber('tip hlásky')
   # print(transcriber.get_last_consonant('tip hlásky', 2))
+  # print(transcriber)
+  # transcriber = Transcriber('všechny')
+  # print(transcriber)
+
+  # transcriber = Transcriber('švédský')
+  # print(transcriber)
+
+  # transcriber = Transcriber('v ústraní')
   # print(transcriber)
